@@ -1,6 +1,11 @@
 angular.module('battlescript.duel', [])
 
 .controller('DuelController', function($scope, Duel){
+  $scope.playerOne = window.localStorage.getItem('username');
+  $scope.playerTwo = 'Player 2';
+
+
+
   $scope.duel;
   $scope.duelDescription = null;
   $scope.duelProjectId = null;
@@ -43,6 +48,11 @@ angular.module('battlescript.duel', [])
   socket.on('updateEnemy', function(text){
     editor2.setValue(text);
     editor2.clearSelection();
+  });
+
+  socket.on('test', function(text){
+    $scope.playerTwo = text;
+    alert(text);
   });
   // location change listeners
 

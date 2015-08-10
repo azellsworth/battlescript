@@ -8,7 +8,7 @@ angular.module('battlescript.auth', [])
 
   $scope.signin = function () {
     Auth.signin($scope.user)
-      .then(function (token) {
+      .then(function (token, username) {
         $window.localStorage.setItem('battlepro', token);
         $location.path('/');
       })
@@ -20,7 +20,7 @@ angular.module('battlescript.auth', [])
 
   $scope.signup = function () {
     Auth.signup($scope.user)
-      .then(function (token) {
+      .then(function (token, username) {
         $window.localStorage.setItem('battlepro', token);
         $location.path('/');
       })

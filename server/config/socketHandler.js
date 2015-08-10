@@ -2,16 +2,17 @@ var roomModel = require('../room/roomModel.js');
 
 module.exports = function(socket){
   var joinedRoom = roomModel.createOrGetRoom();
+
   console.log('connected');
   // Join a room
   socket.join(joinedRoom.count);
   // Increment members
   joinedRoom.members++;
 
+  socket.emit('test', 'SUPERMAN');
+
   // Save the room. Save it with the count (its like a key)
   roomModel.save(joinedRoom);
-
-
   socket.on('textChange', function(data){
     socket.broadcast.to(joinedRoom.count).emit('updateEnemy', data);
   });
