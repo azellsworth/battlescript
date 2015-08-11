@@ -41,7 +41,7 @@ angular.module('battlescript.services', [])
 
   // signs out users
   var signout = function () {
-    window.username = undefined;
+    $window.localStorage.setItem('username', undefined);
     $window.localStorage.removeItem('battlepro');
     $location.path('/signin');
   };
