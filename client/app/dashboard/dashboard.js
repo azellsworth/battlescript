@@ -39,18 +39,19 @@ angular.module('battlescript.dashboard', [])
 
   var socket = Sockets.createSocket(['username=' + $scope.username, 'handler=dashboard']);
 
-  $scope.$on('$routeChangeStart', $scope.logout);
+  $scope.$on('$routeChangeStart', $scope.disconnect);
 
   // This does the same, for refresh. Now go to socket handler for more info
   window.onbeforeunload = function(e) {
-    $scope.logout();
+    $scope.disconnect();
   };
   
-  // Logout or back button
-  // window.addEventListener("hashchange", $scope.logout)
-  window.onhashchange = $scope.logout;
+  // disconnect or back button
+  // window.addEventListener("hashchange", $scope.disconnect)
+  window.onhashchange = $scope.disconnect;
 
-  $scope.logout = function(){
+  $scope.disconnect = function($event){
+    $event.preventDefault();
     socket.emit('userLoggedOut');
     console.log('LEAVING DASHBOARD');
     socket.disconnect();

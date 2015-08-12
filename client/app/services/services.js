@@ -137,7 +137,7 @@ angular.module('battlescript.services', [])
     var query = params.join('&');
     return io('http://localhost:8000', {query: query});
   };
-
+  
   return {
     createSocket: createSocket
   }

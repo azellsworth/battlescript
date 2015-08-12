@@ -19,7 +19,11 @@
             <a href="#/">Preferences</a>
           </li>
           <li class="header-main__user-dropdown-item">
+<<<<<<< HEAD
             <header-logout logout="logout()"></header-logout>
+=======
+            <a href="#" ng-click="disconnect($event)">Log out</a>
+>>>>>>> Nothing much...
           </li>
         </ul>
       </div>
