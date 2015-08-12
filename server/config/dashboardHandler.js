@@ -6,6 +6,7 @@ module.exports = function(socket, io){
   socket.join('dashboard');
 
   var username = socket.handshake.query.username;
+  console.log(username, " JOINED DASHBOARD");
   socketList[username] = socket.id;
   
   // send signal that user has connected to dashboard
@@ -34,6 +35,7 @@ module.exports = function(socket, io){
   });
 
   socket.on('userLoggedOut', function(){
+    console.log("USER HAS LEFT DASHBOARD");
     updateUsers();
   });
 };

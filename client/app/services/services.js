@@ -52,8 +52,7 @@ angular.module('battlescript.services', [])
     $window.localStorage.removeItem('battlepro');
     $location.path('/signin');
 
-    console.log('this is user!!!', user)
-    console.log('inside signout factory')
+    console.log('Signing out: ', user)
     
     return $http({
       method: 'POST',

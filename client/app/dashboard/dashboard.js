@@ -37,7 +37,7 @@ angular.module('battlescript.dashboard', [])
 
   // TODO: extract these out into a Socket factory for simple reuse
 
-  var socket = Sockets.createSocket(['username=nick', 'handler=dashboard']);
+  var socket = Sockets.createSocket(['username=' + $scope.username, 'handler=dashboard']);
 
   $scope.$on('$routeChangeStart', $scope.logout);
 
@@ -46,11 +46,13 @@ angular.module('battlescript.dashboard', [])
     $scope.logout();
   };
   
-  // Logout on back button
+  // Logout or back button
   window.addEventListener("hashchange", $scope.logout)
 
   $scope.logout = function(){
     socket.emit('userLoggedOut');
+    console.log('LEAVING DASHBOARD');
+    socket.disconnect();
   };
 
   ////////////////////////////////////////////////////////////

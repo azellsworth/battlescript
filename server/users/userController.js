@@ -18,12 +18,16 @@ module.exports = {
           return user.comparePasswords(password)
             .then(function(foundUser) {
               if (foundUser) {
+
+                //set the user to be online
+                user.onlineStatus = true;
+                user.save();
+                console.log("SIGNED IN USER", user);
+
+                // create a token and return it to the client
                 var token = jwt.encode(user, 'secret');
                 res.json({token: token});
 
-                //save the user to currentUsers array
-                currentUsers[user.username] = user;
-                console.log("CURRENT USER LIST :", currentUsers);
 
               } else {
                 return next(new Error('No user'));
@@ -60,9 +64,10 @@ module.exports = {
         }
       })
       .then(function (user) {
-        
-        currentUsers[user.username] = user;
-        console.log("CURRENT USER LIST :", currentUsers);
+
+        // Set online status to true
+        user.onlineStatus = true;
+        user.save();
 
         // create token to send back for auth
         var token = jwt.encode(user, 'secret');
@@ -99,22 +104,31 @@ module.exports = {
   },
 
   signout: function (req, res, next){
-      console.log("this is req.body",req.body);
+      // console.log("this is req.body",req.body);
       var username = req.body.username;
       var findUser = Q.nbind(User.findOne, User);
+      console.log("LOOKING FOR USER TO SIGN OUT: ", username)
       
       findUser({username: username})
         .then(function (user) {
-          console.log('THIS IS USER', user)
-          var username = user.username;
-          console.log("this is username", username);
-          delete currentUsers[username];
-          console.log(">>>> when log out",currentUsers)
+          console.log('USER SIGNING OUT: ', user)
+
+          // Set online status to false
+          user.onlineStatus = false;
+          user.save();
+
         });
   },
 
   getUsers: function (req, res, next){
-    console.log("SENDING CURRENT USERS ", currentUsers);
-    res.send(currentUsers);
+    var findUsers = Q.nbind(User.find, User);
+    findUsers({onlineStatus: true})
+    .then(function(onlineUsers){
+      var onlineList = onlineUsers.map(function(user){
+        return user.username;
+      });
+      console.log("ONLINE USERS: ", onlineList);
+      res.send(currentUsers);
+    });
   }
 };
