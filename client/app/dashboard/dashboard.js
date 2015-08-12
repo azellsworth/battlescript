@@ -47,7 +47,8 @@ angular.module('battlescript.dashboard', [])
   };
   
   // Logout or back button
-  window.addEventListener("hashchange", $scope.logout)
+  // window.addEventListener("hashchange", $scope.logout)
+  window.onhashchange = $scope.logout;
 
   $scope.logout = function(){
     socket.emit('userLoggedOut');
