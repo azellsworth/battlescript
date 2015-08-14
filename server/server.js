@@ -28,8 +28,8 @@ io.on('connection', function(socket) {
 });
 
 // set up two handlers for separate sockets
-var battleHandler = require('./config/battleHandler.js');
-var dashboardHandler = require('./config/dashboardHandler.js');
+var battleHandler = require('./handlers/battleHandler.js');
+var dashboardHandler = require('./handlers/dashboardHandler.js');
 
 
 // For handling various sockets, goto socket battleHandler in config js

@@ -49,6 +49,12 @@ angular.module('battlescript', [
       templateUrl: 'app/battle/battle.html',
       controller: 'BattleController',
       authenticate: true
+    })
+    .state('collaborate', {
+      url: '/collaborate/:id',
+      templateUrl: 'app/collaborate/collaborate.html',
+      controller: 'CollaborateController',
+      authenticate: true
     });
 
     $urlRouterProvider.otherwise('/');
