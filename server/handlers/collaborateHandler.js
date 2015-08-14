@@ -21,7 +21,7 @@ module.exports = function(socket, io){
 
     // handle text changes
     socket.on('textChange', function(data){
-      socket.broadcast.to(joinedRoom.id).emit('updateEnemy', data);
+      socket.broadcast.to(joinedRoom.id).emit('updateFriend', data);
     });
 
     socket.on('winnerFound', function(){

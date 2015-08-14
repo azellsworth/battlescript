@@ -44,12 +44,12 @@ angular.module('battlescript', [
       controller: 'DashboardController',
       authenticate: true
     })
-    .state('battleroom', {
-      url: '/battle/:id',
-      templateUrl: 'app/battle/battle.html',
-      controller: 'BattleController',
-      authenticate: true
-    })
+    // .state('battleroom', {
+    //   url: '/battle/:id',
+    //   templateUrl: 'app/battle/battle.html',
+    //   controller: 'BattleController',
+    //   authenticate: true
+    // });
     .state('collaborate', {
       url: '/collaborate/:id',
       templateUrl: 'app/collaborate/collaborate.html',
@@ -193,7 +193,8 @@ angular.module('battlescript', [
 
       $rootScope.battleSocket = Socket.createSocket('battle', [
         'username=' + Users.getAuthUser(),
-        'handler=battle',
+        // 'handler=battle',
+        'handler=collaborate',
         'roomhash=' + roomhash
       ]);
 

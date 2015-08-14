@@ -1,4 +1,4 @@
-angular.module('battlescript.battle', [])
+angular.module('battlescript.collaborate', [])
 
 .controller('CollaborateController', function($rootScope, $scope, $timeout, $location, $stateParams, Users, Battle) {
 
@@ -92,8 +92,9 @@ angular.module('battlescript.battle', [])
       // if only one user, don't change player 2
     });
 
-    $rootScope.battleSocket.on('updateEnemy', function(text){
-      editor2.setValue(text);
+    $rootScope.battleSocket.on('updateFriend', function(text){
+      console.log('FRIEND UPDATING');
+      editor1.setValue(text);
     });
 
 
