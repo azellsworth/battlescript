@@ -50,11 +50,11 @@ angular.module('battlescript.dashboard', [])
   // window.addEventListener("hashchange", $scope.disconnect)
   window.onhashchange = $scope.disconnect;
 
-  $scope.disconnect = function($event){
-    $event.preventDefault();
-    socket.emit('userLoggedOut');
+  $scope.disconnect = function(){
+    // socket.emit('leavingDashboard');
+    // socket.disconnect();
     console.log('LEAVING DASHBOARD');
-    socket.disconnect();
+    // socket.emit();
   };
 
   ////////////////////////////////////////////////////////////

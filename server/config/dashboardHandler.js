@@ -3,6 +3,7 @@
 var socketList = {};
 
 module.exports = function(socket, io){
+  var handler = {socket: socket};
   socket.join('dashboard');
 
   var username = socket.handshake.query.username;
@@ -34,8 +35,15 @@ module.exports = function(socket, io){
     socket.broadcast.to(opponentId).emit('prepareForBattle');
   });
 
-  socket.on('userLoggedOut', function(){
+  socket.on('disconnect', function(){
+    console.log("USER DISCONNECTED FROM DASHBOARD");
+  })
+
+  socket.on('leavingDashboard', function(){
     console.log("USER HAS LEFT DASHBOARD");
-    updateUsers();
+    console.log(socket.disconnect);
+    socket.disconnect();
+    // updateUsers();
   });
+  return handler;
 };

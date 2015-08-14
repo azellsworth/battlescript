@@ -98,8 +98,8 @@ angular.module('battlescript', [
 .directive('headerLogout', function() {
   var link = function(scope, element, attrs) {
     element.bind('click', function(e) {
-      e.preventDefault();
-      scope.$parent.$apply(attrs.logout);
+      // e.preventDefault();
+      scope.$parent.$apply(attrs.disconnect);
     });
   };
 
@@ -115,6 +115,7 @@ angular.module('battlescript', [
 ////////////////////////////////////////////////////////////
 
 .run(function ($rootScope, $location, Auth) {
+  console.log("INSIDE RUN");
   $rootScope.$on('$stateChangeStart', function (evt, next, current) {
     // redirect home if auth required and user isn't auth
     if (next && next.authenticate && !Auth.isAuth()) {
